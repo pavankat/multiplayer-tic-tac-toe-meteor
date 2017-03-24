@@ -6,7 +6,7 @@ import { Tasks } from '../api/tasks.js';
 import { Games } from '../api/tasks.js';
 
 import './task.js';
-import './game.html'; //need this here or the game.html template file won't be used in body.html
+import './joinGame.html'; //need this here or the game.html template file won't be used in body.html
 import './body.html';
 
 
@@ -67,9 +67,24 @@ Template.body.events({
     // Clear form
     target.player.value = '';
   },
-  // 'click .joinGame'(event) {
-  //   console.log(event);
-  // },
+  'click .joinGame'(event) {
+    console.log(event);
+    //event.target is the button we clicked on
+    //this is the document here
+
+    let button = event.target 
+    let joinAs = $(button).data('joinas')
+
+    if (joinAs == 'o'){
+      Games.update(this._id, {
+        $set: { "os" : Meteor.userId()},
+      });
+    }else {
+      Games.update(this._id, {
+        $set: { "xs" : Meteor.userId()},
+      });
+    }
+  },
   'submit .new-task'(event) {
     // Prevent default browser form submit
     event.preventDefault();
