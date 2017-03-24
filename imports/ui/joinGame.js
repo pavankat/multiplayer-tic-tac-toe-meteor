@@ -10,7 +10,6 @@ Template.joinGame.helpers({
 		return Meteor.users.find(_id).fetch()[0].username;
 	},
     belongs : function() {
-    	console.log((this.xs == Meteor.userId()) || (this.os == Meteor.userId()));
     	return ((this.xs == Meteor.userId()) || (this.os == Meteor.userId()));
     }
 });

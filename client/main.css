@@ -25,6 +25,11 @@ body {
   padding: 50px;
 }
 
+.ticTacToe td {
+  border: solid black;
+  padding: 10px;
+}
+
 .makeGame {
   margin: 10px 0 10px 0;
   background: #306b7b;
