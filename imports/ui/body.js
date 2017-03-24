@@ -21,7 +21,7 @@ Template.body.helpers({
     return Games.find( { $or: [ { xs: null }, { os: null } ] } )
   },
   closedGames() {
-    return Games.find({ $and: [ { xs: {$exists : true} }, { os: {$exists : true} } ] })
+    return Games.find({ $and: [ { xs: {$ne: null} }, { os: {$ne: null} } ] })
   },
   tasks() {
     const instance = Template.instance();
