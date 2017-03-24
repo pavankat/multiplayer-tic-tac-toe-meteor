@@ -7,6 +7,7 @@ import { Games } from '../api/tasks.js';
 
 import './task.js';
 import './joinGame.html'; //need this here or the game.html template file won't be used in body.html
+import './joinGame.js'
 import './body.html';
 
 Template.body.onCreated(function bodyOnCreated() {

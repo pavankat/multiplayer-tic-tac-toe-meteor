@@ -14,4 +14,10 @@
 	{{#unless os}}	
 		<button class="joinGame" data-joinas="o">Join as O's</button>
 	{{/unless}}
+
+ 	{{#if belongs}}
+		<button>Play Game</button>
+	{{else}}
+		<button>Watch Game</button>
+	{{/if}}
 </template>
