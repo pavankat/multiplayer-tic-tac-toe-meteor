@@ -18,7 +18,6 @@
           <button>Make Game</button>
         </form>
 
-
         <form class="new-task">
           <input type="text" name="text" placeholder="Type to add new tasks" />
         </form>
@@ -29,7 +28,24 @@
       {{#each tasks}}
         {{> task}}
       {{/each}}
+    </ul>
 
+    <h2>Your Games Currently Being Played</h2>
+    <ul>
+      {{#each openGames}}
+        {{> joinGame}} <hr> <br><br>
+      {{/each}}
+    </ul>
+
+    <h2>Games Being Played</h2>
+    <ul>
+      {{#each openGames}}
+        {{> joinGame}} <hr> <br><br>
+      {{/each}}
+    </ul>
+
+    <h2>Open Games</h2>
+    <ul>
       {{#each openGames}}
         {{> joinGame}} <hr> <br><br>
       {{/each}}

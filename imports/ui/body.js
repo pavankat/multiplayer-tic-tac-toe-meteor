@@ -46,20 +46,19 @@ Template.body.events({
     let game;
 
     if (player == 1){
-      game = {
-        board: [],
-        xs: Meteor.userId(),
-        os: null,
-        createdAt: new Date(), // current time
-      }
+      let xs = Meteor.userId();
+      let os = null;
     }else {
-      // Insert a task into the collection
-      game = {
-        board: [],
-        xs: null,
-        os: Meteor.userId(),
-        createdAt: new Date(), // current time
-      }
+      let xs = null;
+      let os = Meteor.userId();
+    }
+
+    game = {
+      board: [],
+      xs: xs,
+      os: os,
+      win: null,
+      createdAt: new Date(), // current time
     }
 
     Games.insert(game);
@@ -76,13 +75,21 @@ Template.body.events({
     let joinAs = $(button).data('joinas')
 
     if (joinAs == 'o'){
-      Games.update(this._id, {
-        $set: { "os" : Meteor.userId()},
-      });
+      if (this.xs != Meteor.userId()){
+        Games.update(this._id, {
+          $set: { "os" : Meteor.userId()},
+        });
+      }else {
+        Bert.alert( 'ya can\'t join your own game brah!', 'danger', 'fixed-top', 'fa-frown-o' );
+      }
     }else {
-      Games.update(this._id, {
-        $set: { "xs" : Meteor.userId()},
-      });
+      if (this.os != Meteor.userId()){
+        Games.update(this._id, {
+          $set: { "xs" : Meteor.userId()},
+        });
+      }else {
+        Bert.alert( 'ya can\'t join your own game brah!', 'danger', 'fixed-top', 'fa-frown-o' );
+      }
     }
   },
   'submit .new-task'(event) {

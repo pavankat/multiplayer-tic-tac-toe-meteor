@@ -30,6 +30,8 @@ ejson@1.0.9-rc.2
 email@1.0.10-rc.2
 es5-shim@4.5.8-rc.2
 fastclick@1.0.9-rc.2
+fortawesome:fontawesome@4.4.0_1
+fourseven:scss@3.3.3_3
 geojson-utils@1.0.6-rc.2
 hot-code-push@1.0.2-rc.2
 html-tools@1.0.7-rc.2
@@ -76,6 +78,7 @@ standard-minifier-css@1.0.4-rc.2
 standard-minifier-js@1.0.4-rc.2
 templating@1.1.7-rc.2
 templating-tools@1.0.2-rc.2
+themeteorchef:bert@2.1.0
 tracker@1.0.11-rc.2
 ui@1.0.9-rc.2
 underscore@1.0.6-rc.2
