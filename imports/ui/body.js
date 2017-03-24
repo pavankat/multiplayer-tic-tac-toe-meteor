@@ -9,12 +9,14 @@ import './task.js';
 import './joinGame.html'; //need this here or the game.html template file won't be used in body.html
 import './body.html';
 
-
 Template.body.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
 });
 
 Template.body.helpers({
+  myGames() {
+    return Games.find( { $or: [ { xs: Meteor.userId() }, { os: Meteor.userId() } ] } )
+  },
   openGames() {
     return Games.find( { $or: [ { xs: null }, { os: null } ] } )
   },

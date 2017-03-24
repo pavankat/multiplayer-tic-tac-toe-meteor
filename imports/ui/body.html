@@ -32,14 +32,14 @@
 
     <h2>Your Games Currently Being Played</h2>
     <ul>
-      {{#each openGames}}
+      {{#each myGames}}
         {{> joinGame}} <hr> <br><br>
       {{/each}}
     </ul>
 
     <h2>Games Being Played</h2>
     <ul>
-      {{#each openGames}}
+      {{#each closedGames}}
         {{> joinGame}} <hr> <br><br>
       {{/each}}
     </ul>
