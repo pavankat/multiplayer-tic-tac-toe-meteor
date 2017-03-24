@@ -1,12 +1,7 @@
 <body>
   <div class="container">
     <header>
-      <h1>Multiplayer Tic Tac Toe in Meteor.js ({{incompleteCount}})</h1>
-
-      <label class="hide-completed">
-        <input type="checkbox" />
-        Hide Completed Tasks
-      </label>
+      <h1>Multiplayer Tic Tac Toe in Meteor.js</h1>
 
       {{> loginButtons}}
 
@@ -17,18 +12,8 @@
           <input type="radio" name="player" value="2" id="o"> <label for="o">o's</label><br>
           <button>Make Game</button>
         </form>
-
-        <form class="new-task">
-          <input type="text" name="text" placeholder="Type to add new tasks" />
-        </form>
       {{/if}}
     </header>
-
-    <ul>
-      {{#each tasks}}
-        {{> task}}
-      {{/each}}
-    </ul>
 
     <h2>Your Games Currently Being Played</h2>
     <ul>

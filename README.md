@@ -1,11 +1,13 @@
-# Simple Todo List
+# Meteor Multiplayer Tic Tac Toe Example
 
-The Meteor Tutorial app.
+## Warning brah
 
-Use it to share a single todo list with your friends. The list updates on everyone's screen in real time, and you can make tasks private if you don't want others to see them.
+autopublish and insecure meteor packages are being used so don't deploy this without removing them and implementing subscriptions and publications.
+
+## How do I learn this?
+
+You can learn the majority of how to do this by going thorugh this to do list tutorial on Meteor.com:
 
 Learn how to build this app by following the [Meteor Tutorial](http://www.meteor.com/install).
 
 Read more about building apps with Meteor in the [Meteor Guide](http://guide.meteor.com).
-
-![screenshot](screenshot.png)

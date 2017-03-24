@@ -1,18 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { ReactiveDict } from 'meteor/reactive-dict';
 
-import { Tasks } from '../api/tasks.js';
-import { Games } from '../api/tasks.js';
+import { Games } from '../api/games.js';
 
-import './task.js';
 import './joinGame.html'; //need this here or the game.html template file won't be used in body.html
 import './joinGame.js'
 import './body.html';
-
-Template.body.onCreated(function bodyOnCreated() {
-  this.state = new ReactiveDict();
-});
 
 Template.body.helpers({
   myGames() {
@@ -23,19 +16,7 @@ Template.body.helpers({
   },
   closedGames() {
     return Games.find({ $and: [ { xs: {$ne: null} }, { os: {$ne: null} } ] })
-  },
-  tasks() {
-    const instance = Template.instance();
-    if (instance.state.get('hideCompleted')) {
-      // If hide completed is checked, filter tasks
-      return Tasks.find({ checked: { $ne: true } }, { sort: { createdAt: -1 } });
-    }
-    // Otherwise, return all of the tasks
-    return Tasks.find({}, { sort: { createdAt: -1 } });
-  },
-  incompleteCount() {
-    return Tasks.find({ checked: { $ne: true } }).count();
-  },
+  }
 });
 
 Template.body.events({
@@ -96,27 +77,5 @@ Template.body.events({
         Bert.alert( 'ya can\'t join your own game brah!', 'danger', 'fixed-top', 'fa-frown-o' );
       }
     }
-  },
-  'submit .new-task'(event) {
-    // Prevent default browser form submit
-    event.preventDefault();
-
-    // Get value from form element
-    const target = event.target;
-    const text = target.text.value;
-
-    // Insert a task into the collection
-    Tasks.insert({
-      text,
-      createdAt: new Date(), // current time
-      owner: Meteor.userId(),
-      username: Meteor.user().username,
-    });
-
-    // Clear form
-    target.text.value = '';
-  },
-  'change .hide-completed input'(event, instance) {
-    instance.state.set('hideCompleted', event.target.checked);
-  },
+  }
 });

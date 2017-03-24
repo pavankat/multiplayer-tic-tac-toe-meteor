@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 
-import { Games } from '../api/tasks.js';
+import { Games } from '../api/games.js';
 
 import './joinGame.html';
 
