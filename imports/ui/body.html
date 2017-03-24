@@ -1,0 +1,38 @@
+<body>
+  <div class="container">
+    <header>
+      <h1>Todo List ({{incompleteCount}})</h1>
+
+      <label class="hide-completed">
+        <input type="checkbox" />
+        Hide Completed Tasks
+      </label>
+
+      {{> loginButtons}}
+
+      {{#if currentUser}}
+        <form class="new-game">
+          X's or O's brah?<br>
+          <input type="radio" name="player" value="1" id="x"> <label for="x">x's</label><br>
+          <input type="radio" name="player" value="2" id="o"> <label for="o">o's</label><br>
+          <button>Make Game</button>
+        </form>
+
+
+        <form class="new-task">
+          <input type="text" name="text" placeholder="Type to add new tasks" />
+        </form>
+      {{/if}}
+    </header>
+
+    <ul>
+      {{#each tasks}}
+        {{> task}}
+      {{/each}}
+
+      {{#each openGames}}
+        {{> joinGame}} <hr> <br><br>
+      {{/each}}
+    </ul>
+  </div>
+</body>

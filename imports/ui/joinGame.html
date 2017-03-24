@@ -1,0 +1,17 @@
+<template name="joinGame" data-gameId="{{_id}}">
+	{{#if os}}
+		{{os}} is playing as O's
+	{{/if}}
+
+	{{#unless xs}}
+		<button class="joinGame" data-joinas="x">Join as X's</button> 
+	{{/unless}}
+
+	{{#if xs}}
+		{{xs}} is playing as O's
+	{{/if}}
+
+	{{#unless os}}	
+		<button class="joinGame" data-joinas="o">Join as O's</button>
+	{{/unless}}
+</template>
