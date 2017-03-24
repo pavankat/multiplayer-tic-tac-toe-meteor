@@ -1,6 +1,7 @@
 <template name="joinGame" data-gameId="{{_id}}">
 	{{#if os}}
-		{{os}} is playing as O's
+		<!-- this is bad we're doing a database call to get a username. We should join the data on the backend with a mongo lookup (new in mongo) --> 
+		{{grabUserName(os)}} is playing as O's
 	{{/if}}
 
 	{{#unless xs}}
@@ -8,7 +9,7 @@
 	{{/unless}}
 
 	{{#if xs}}
-		{{xs}} is playing as X's
+		{{grabUserName(xs)}} is playing as X's
 	{{/if}}
 
 	{{#unless os}}	
