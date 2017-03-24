@@ -46,13 +46,15 @@ Template.body.events({
     const target = event.target;
     const player = target.player.value;
     let game;
+    let xs;
+    let os;
 
     if (player == 1){
-      let xs = Meteor.userId();
-      let os = null;
+      xs = Meteor.userId();
+      os = null;
     }else {
-      let xs = null;
-      let os = Meteor.userId();
+      xs = null;
+      os = Meteor.userId();
     }
 
     game = {
