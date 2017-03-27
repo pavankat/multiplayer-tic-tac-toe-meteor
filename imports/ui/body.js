@@ -35,7 +35,12 @@ Template.body.helpers({
 });
 
 Template.body.events({
-
+  'click td' : function(event){
+    $(event.target).text('X');
+    Games.update(this._id, {
+      $set: { "board" : [['', '', ''],['', 'x', ''],['', '', '']]},
+    });
+  },
   //not using es6 so I can use jQuery methods 
   'click .loadGame' : function(event) {
     console.log(event.target);

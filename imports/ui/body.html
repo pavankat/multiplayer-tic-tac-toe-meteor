@@ -7,16 +7,22 @@
     </header>
 
     <div class="makeGame">
-      <h3>Make a Game Brah</h3>
-
       {{#if currentUser}}
+        <h3>Make a Game Brah</h3>
+
         <form class="new-game">
           X's or O's brah?<br>
           <input type="radio" name="player" value="1" id="x"> <label for="x">x's</label><br>
           <input type="radio" name="player" value="2" id="o"> <label for="o">o's</label><br>
           <button>Make Game</button>
         </form>
+      {{else}}
+        <p>Login to make a game</p>
       {{/if}}
+
+      {{#unless currentUser}}
+        Login to make a game seriously dude
+      {{/unless}}
     </div>
 
     <div id="theGame">

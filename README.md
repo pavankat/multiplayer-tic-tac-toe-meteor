@@ -1,5 +1,7 @@
 # Meteor Multiplayer Tic Tac Toe Example
 
+ctrl + m brings up meteor toys -> yet another reason to use Meteor.
+
 ## Warning brah
 
 autopublish and insecure meteor packages are being used so don't deploy this without removing them and implementing subscriptions and publications.
