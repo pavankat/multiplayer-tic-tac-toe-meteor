@@ -4,9 +4,6 @@ import '../ui/game.html';
 import '../ui/body.html';
 import '../ui/layouts/MainLayout.html';
 
-//in the intermediate example: 
-	//
-
 FlowRouter.route('/', {
 	name: 'home',
 	action() {

@@ -7,6 +7,8 @@ import './joinGame.html'; //need this here or the game.html template file won't 
 import './joinGame.js'
 import './body.html';
 
+console.log(Games.find( { $or: [ { xs: Meteor.userId() }, { os: Meteor.userId() } ] } ).fetch());
+
 //need to use brd to redraw the board
 function drawBoard(brd){
   let table = $('<table>').addClass('ticTacToe');
@@ -24,6 +26,7 @@ function drawBoard(brd){
 
 Template.body.helpers({
   myGames() {
+    debugger;
     return Games.find( { $or: [ { xs: Meteor.userId() }, { os: Meteor.userId() } ] } )
   },
   openGames() {
@@ -50,6 +53,7 @@ Template.body.events({
     $('#theGame').append(board);
   },
   'submit .new-game'(event) {
+    debugger;
     // Prevent default browser form submit
     event.preventDefault();
 

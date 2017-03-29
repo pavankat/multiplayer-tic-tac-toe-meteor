@@ -14,6 +14,7 @@ Template.Game.onCreated(function(){
 Template.Game.helpers({
 	game: ()=> {
 		var id = FlowRouter.getParam('id');
+		console.log(Games.findOne({_id: id}));
 		return Games.findOne({_id: id});
 	}
 });
