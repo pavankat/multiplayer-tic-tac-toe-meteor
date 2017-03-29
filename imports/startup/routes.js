@@ -2,23 +2,25 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import '../ui/game.html';
 import '../ui/body.html';
+import '../ui/layouts/MainLayout.html';
 
 //in the intermediate example: 
-	//BlazeLayout.render('MainLayout', {main: 'Recipes'});
+	//
 
 FlowRouter.route('/', {
 	name: 'home',
 	action() {
 		console.log('home')
-		BlazeLayout.render('imports/ui/body');
+		BlazeLayout.render('MainLayout', {main: 'Main'});
+
 	}
 });
 
-FlowRouter.route('/game/:id', {
+FlowRouter.route('/games/:id', {
 	name: 'game',
 	action() {
 		console.log('game')
-		BlazeLayout.render('imports/ui/game');
+		BlazeLayout.render('MainLayout', {main: 'Game'});
 	}
 });
 
