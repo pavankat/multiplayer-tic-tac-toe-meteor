@@ -7,22 +7,7 @@ import './joinGame.html'; //need this here or the game.html template file won't 
 import './joinGame.js'
 import './body.html';
 
-//need to use brd to redraw the board
-function drawBoard(brd){
-  let table = $('<table>').addClass('ticTacToe');
-
-  for (var i=0; i<3; i++){
-    let tr = $('<tr>');
-    for (var j=0; j<3; j++){
-      let td = $('<td>');
-      tr.append(td);
-    }
-    table.append(tr);
-  }  
-  return table;
-}
-
-Template.body.helpers({
+Template.Main.helpers({
   myGames() {
     debugger;
     return Games.find( { $or: [ { xs: Meteor.userId() }, { os: Meteor.userId() } ] } )
@@ -35,20 +20,12 @@ Template.body.helpers({
   }
 });
 
-Template.body.events({
+Template.Main.events({
   'click td' : function(event){
     $(event.target).text('X');
     Games.update(this._id, {
       $set: { "board" : [['', '', ''],['', 'x', ''],['', '', '']]},
     });
-  },
-  //not using es6 so I can use jQuery methods 
-  'click .loadGame' : function(event) {
-    console.log(event.target);
-    console.log(this);
-    let board = drawBoard(this.board);
-    $('#theGame').empty();
-    $('#theGame').append(board);
   },
   'submit .new-game'(event) {
     debugger;

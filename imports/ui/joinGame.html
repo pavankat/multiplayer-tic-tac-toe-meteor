@@ -15,7 +15,7 @@
 	{{#unless os}}	
 		<button class="joinGame" data-joinas="o">Join as O's</button>
 	{{/unless}}
-
-	<button class="loadGame">{{#if belongs}} Play Game  {{else}} Watch Game {{/if}}</button>
-
+	
+	<a href="/games/{{_id}}">{{#if belongs}} Play Game {{else}} Watch Game {{/if}}</a>
+	
 </template>
