@@ -6,10 +6,10 @@ import { Games } from '../api/games.js';
 import './joinGame.html'; //need this here or the game.html template file won't be used in body.html
 import './joinGame.js'
 import './body.html';
+import './game.js'; //if this isn't here then Games from the api/games.js file does not load properly
 
 Template.Main.helpers({
   myGames() {
-    debugger;
     return Games.find( { $or: [ { xs: Meteor.userId() }, { os: Meteor.userId() } ] } )
   },
   openGames() {
