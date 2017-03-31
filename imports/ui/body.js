@@ -21,12 +21,6 @@ Template.Main.helpers({
 });
 
 Template.Main.events({
-  'click td' : function(event){
-    $(event.target).text('X');
-    Games.update(this._id, {
-      $set: { "board" : [['', '', ''],['', 'x', ''],['', '', '']]},
-    });
-  },
   'submit .new-game'(event) {
     debugger;
     // Prevent default browser form submit
