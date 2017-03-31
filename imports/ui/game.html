@@ -2,15 +2,14 @@
 	<h1>Play Tic Tac Toe</h1>
 	{{#if game}}
 		{{#if currentUserIsOs}}
-			<p>You are O's</p>
+			<p>You ({{currentUser.username}}) are O's</p>
+			<p>{{grabUserName game.xs}} is X's</p>
 		{{/if}}
 
 		{{#if currentUserIsXs}}
-			<p>You are X's</p>
-		{{/if}}
-
-		<p>O's: {{game.os}}</p>
-		<p>X's: {{game.xs}}</p>
+			<p>You ({{currentUser.username}}) are X's</p>
+			<p>{{grabUserName game.os}} is O's</p>
+		{{/if}}		
 	{{else}}
 		Loading...
 	{{/if}}

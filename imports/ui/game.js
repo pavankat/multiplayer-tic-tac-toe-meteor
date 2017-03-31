@@ -38,9 +38,6 @@ Template.Game.helpers({
     	return ((xs == Meteor.userId()) || (os == Meteor.userId()));
     },
     currentUserIsOs : function() {
-    	console.log('-----yo-----');
-    	console.log(this.os);
-    	console.log('-----yo-----');
     	return ((os == Meteor.userId()));
     },
     currentUserIsXs : function() {
