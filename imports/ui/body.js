@@ -54,6 +54,7 @@ Template.Main.events({
       xs: xs,
       os: os,
       win: null,
+      winner: null,
       createdAt: new Date(), // current time
     }
 

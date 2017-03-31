@@ -12,7 +12,38 @@ let xs;
 let os;
 let game_id;
 let game;
-let Gamez = Games;
+let winningCombinations = [
+	['a', 'b', 'c'],
+	['d', 'e', 'f'],
+	['g', 'h', 'i'],
+
+	['a', 'd', 'g'],
+	['b', 'e', 'h'],
+	['c', 'f', 'i'],
+
+	['a', 'e', 'i'],
+	['c', 'e', 'g'],
+];
+let xWin = false;
+let oWin = false;
+
+function checkWinner(){
+	for (let i=0; i<winningCombinations.length; i++){
+		let xCount = 0;
+		let oCount = 0;
+		for (let j=0; j<winningCombinations[i].length; j++){
+			let mini = winningCombinations[i][j];
+
+			let result = $('td[data-pos=\'' + mini + '\']').text();
+
+			if (result == 'X') xCount++;
+			else if (result == 'O') oCount++;
+		}
+
+		if (xCount == 3) xWin = true;
+		else if(oCount == 3) oWin = true;
+	}
+}
 
 Template.registerHelper('incremented', function (index) {
     index++;
@@ -21,7 +52,7 @@ Template.registerHelper('incremented', function (index) {
 
 Template.Game.helpers({
 	game() {
-		game = Gamez.findOne({_id: FlowRouter.getParam('id')});
+		game = Games.findOne({_id: FlowRouter.getParam('id')});
 		xs = game.xs;
 		os = game.os;
 		game_id = FlowRouter.getParam('id');
@@ -55,16 +86,26 @@ Template.Game.events({
     	if (targ.text() == ''){
     		var ob = {};
 
+    		checkWinner();
+
     		if (xs == Meteor.userId()){	
     			ob[pos] = 'X'
-	    		Gamez.update(FlowRouter.getParam('id'), {
+    			if (xWin){
+    				ob['win'] = true;
+    				ob['winner'] = game.xs;
+    			}
+	    		Games.update(FlowRouter.getParam('id'), {
 	    		  $set: ob,
 	    		});
     		}
 
     		if (os == Meteor.userId()){
     			ob[pos] = 'O'
-    			Gamez.update(FlowRouter.getParam('id'), {
+    			if (oWin){
+    				ob['win'] = true;
+    				ob['winner'] = game.os;
+    			}
+    			Games.update(FlowRouter.getParam('id'), {
     			  $set: ob,
     			});
     		}
