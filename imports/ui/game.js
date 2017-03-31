@@ -52,7 +52,7 @@ Template.Game.events({
     	let pos = targ.data('pos');
 
     	//only fill in if empty
-    	if (targ.val() == ''){
+    	if (targ.text() == ''){
     		var ob = {};
 
     		if (xs == Meteor.userId()){	
@@ -60,7 +60,6 @@ Template.Game.events({
 	    		Gamez.update(FlowRouter.getParam('id'), {
 	    		  $set: ob,
 	    		});
-	    		targ.text('X');
     		}
 
     		if (os == Meteor.userId()){
@@ -68,7 +67,6 @@ Template.Game.events({
     			Gamez.update(FlowRouter.getParam('id'), {
     			  $set: ob,
     			});
-    			targ.text('O');
     		}
     	}
   },
