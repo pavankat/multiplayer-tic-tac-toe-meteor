@@ -85,15 +85,21 @@ Template.Game.events({
     	//only fill in if empty
     	if (targ.text() == ''){
     		var ob = {};
-
+    		
     		checkWinner();
+
+    		if (xWin){
+    			ob['win'] = true;
+    			ob['winner'] = game.xs;
+    		}
+
+    		if (oWin){
+    			ob['win'] = true;
+    			ob['winner'] = game.os;
+    		}
 
     		if (xs == Meteor.userId()){	
     			ob[pos] = 'X'
-    			if (xWin){
-    				ob['win'] = true;
-    				ob['winner'] = game.xs;
-    			}
 	    		Games.update(FlowRouter.getParam('id'), {
 	    		  $set: ob,
 	    		});
@@ -101,10 +107,6 @@ Template.Game.events({
 
     		if (os == Meteor.userId()){
     			ob[pos] = 'O'
-    			if (oWin){
-    				ob['win'] = true;
-    				ob['winner'] = game.os;
-    			}
     			Games.update(FlowRouter.getParam('id'), {
     			  $set: ob,
     			});
