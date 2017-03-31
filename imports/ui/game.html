@@ -1,22 +1,46 @@
 <template name="Game">
-	<h1>{{game.os}} -> {{game.xs}} -></h1>
+	<h1>Play Tic Tac Toe</h1>
+	{{#if game}}
+		{{#if currentUserIsOs}}
+			<p>You are O's</p>
+		{{/if}}
+
+		{{#if currentUserIsXs}}
+			<p>You are X's</p>
+		{{/if}}
+
+		<p>O's: {{game.os}}</p>
+		<p>X's: {{game.xs}}</p>
+	{{else}}
+		Loading...
+	{{/if}}
+<!-- when the game starts up:
+ -->
+	<!-- <table>
+			<tr>
+				<td data-x="1" data-y="1"></td> <td data-x="1" data-y="2"></td> <td data-x="1" data-y="3"></td>
+			</tr>
+				
+			<tr> 
+				<td data-x="2" data-y="1"></td> <td data-x="2" data-y="2"></td> <td data-x="2" data-y="3"></td>
+			</tr>
+		
+			<tr> 
+				<td data-x="3" data-y="1"></td> <td data-x="3" data-y="2"></td> <td data-x="3" data-y="3"></td>
+			</tr>
+	</table> -->
 
 	<table>
-	    <tr>
-	        <td data-x="1" data-y="1"></td>
-	        <td data-x="1" data-y="2"></td>
-	        <td data-x="1" data-y="3"></td>
-	    </tr>
-	    <tr>
-	        <td data-x="2" data-y="1"></td>
-	        <td data-x="2" data-y="2"></td>
-	        <td data-x="2" data-y="3"></td>
-	    </tr>
-	    <tr>
-	        <td data-x="3" data-y="1"></td>
-	        <td data-x="3" data-y="2"></td>
-	        <td data-x="3" data-y="3"></td>
-	    </tr>
+		{{#each game.board}}
+			{{#let rowIndex=@index}} <!-- need this here to get the index from the first loop -->
+			<tr>
+				{{#each this}}
+					<!-- incremented makes the index go up by one -->
+					<td data-x="{{incremented rowIndex}}" data-y="{{incremented @index}}">{{this}}</td>
+				{{/each}}
+			</tr>
+			{{/let}}
+		{{/each}}
 	</table>
 
 	<a href="/">Go Back</a>

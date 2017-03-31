@@ -42,7 +42,7 @@ Template.Main.events({
     }
 
     game = {
-      board: [],
+      board: [["", "", ""], ["", "", ""], ["", "", ""]],
       xs: xs,
       os: os,
       win: null,
