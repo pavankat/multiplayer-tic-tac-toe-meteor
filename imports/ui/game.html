@@ -13,33 +13,23 @@
 	{{else}}
 		Loading...
 	{{/if}}
-<!-- when the game starts up:
- -->
-	<!-- <table>
-			<tr>
-				<td data-x="1" data-y="1"></td> <td data-x="1" data-y="2"></td> <td data-x="1" data-y="3"></td>
-			</tr>
-				
-			<tr> 
-				<td data-x="2" data-y="1"></td> <td data-x="2" data-y="2"></td> <td data-x="2" data-y="3"></td>
-			</tr>
-		
-			<tr> 
-				<td data-x="3" data-y="1"></td> <td data-x="3" data-y="2"></td> <td data-x="3" data-y="3"></td>
-			</tr>
-	</table> -->
 
 	<table>
-		{{#each game.board}}
-			{{#let rowIndex=@index}} <!-- need this here to get the index from the first loop -->
-			<tr>
-				{{#each this}}
-					<!-- incremented makes the index go up by one -->
-					<td data-x="{{incremented rowIndex}}" data-y="{{incremented @index}}">{{this}}</td>
-				{{/each}}
-			</tr>
-			{{/let}}
-		{{/each}}
+	    <tr>
+	        <td data-pos="a">{{a}}</td>
+	        <td data-pos="b">{{b}}</td>
+	        <td data-pos="c">{{c}}</td>
+	    </tr>
+	    <tr>
+	        <td data-pos="d">{{d}}</td>
+	        <td data-pos="e">{{e}}</td>
+	        <td data-pos="f">{{f}}</td>
+	    </tr>
+	    <tr>
+	        <td data-pos="g">{{g}}</td>
+	        <td data-pos="h">{{h}}</td>
+	        <td data-pos="i">{{i}}</td>
+	    </tr>
 	</table>
 
 	<a href="/">Go Back</a>

@@ -4,16 +4,15 @@ import { Games } from '../api/games.js';
 
 import './game.html';
 
-// Template.Game.onCreated(function(){
-// 	var self = this;
-// 	self.autorun(function() {
-// 		var game_id = FlowRouter.getParam('id');
-// 	});
-// });
-
+//make global
+/*
+	Exception in template helper: TypeError: Cannot read property 'xs' of undefined
+*/
 let xs;
 let os;
 let game_id;
+let game;
+let Gamez = Games;
 
 Template.registerHelper('incremented', function (index) {
     index++;
@@ -22,8 +21,7 @@ Template.registerHelper('incremented', function (index) {
 
 Template.Game.helpers({
 	game() {
-		let game = Games.findOne({_id: FlowRouter.getParam('id')});
-
+		game = Gamez.findOne({_id: FlowRouter.getParam('id')});
 		xs = game.xs;
 		os = game.os;
 		game_id = FlowRouter.getParam('id');
@@ -48,29 +46,31 @@ Template.Game.helpers({
 Template.Game.events({
   'click td'(event){
 
-   	//game_id, xs, os
+	   	//game_id, xs, os is available here
 
-    //works
-    if (xs == Meteor.userId()){
-    	$(event.target).text('X');
+    	let targ = $(event.target);
+    	let pos = targ.data('pos');
 
-		// Games.update(this._id, {
-		//   $set: { "os" : Meteor.userId()},
-		// });
-    }
+    	//only fill in if empty
+    	if (targ.val() == ''){
+    		var ob = {};
 
-    //works
-    if (os == Meteor.userId()){
-		$(event.target).text('O');
+    		if (xs == Meteor.userId()){	
+    			ob[pos] = 'X'
+	    		Gamez.update(FlowRouter.getParam('id'), {
+	    		  $set: ob,
+	    		});
+	    		targ.text('X');
+    		}
 
-		// Games.update(this._id, {
-		//   $set: { "xs" : Meteor.userId()},
-		// });
-    }
-
-    // Games.update(this._id, {
-    //   $set: { "board" : [['', '', ''],['', 'x', ''],['', '', '']]},
-    // });
+    		if (os == Meteor.userId()){
+    			ob[pos] = 'O'
+    			Gamez.update(FlowRouter.getParam('id'), {
+    			  $set: ob,
+    			});
+    			targ.text('O');
+    		}
+    	}
   },
 });
 
