@@ -25,11 +25,6 @@ body {
   padding: 50px;
 }
 
-.ticTacToe td {
-  border: solid black;
-  padding: 10px;
-}
-
 .makeGame {
   margin: 10px 0 10px 0;
   background: #306b7b;
@@ -134,4 +129,11 @@ header .hide-completed {
   .new-task input {
     padding-bottom: 5px;
   }
+}
+
+/* tic tac toe board */
+td {
+    border: solid black;
+    padding: 20px;
+    font-size: 20px;
 }
