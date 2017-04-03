@@ -9,20 +9,25 @@ import './body.html';
 import './game.js'; //if this isn't here then Games from the api/games.js file does not load properly
 
 Template.Main.helpers({
-  myGames() {
-    return Games.find( { $or: [ { xs: Meteor.userId() }, { os: Meteor.userId() } ] } )
+  myCurrentGames() {
+    return Games.find( { $or: [ { xs: Meteor.userId() }, { os: Meteor.userId() } ], win : false } )
   },
-  openGames() {
-    return Games.find( { $or: [ { xs: null }, { os: null } ] } )
+  myPastGames() {
+    return Games.find( { $or: [ { xs: Meteor.userId() }, { os: Meteor.userId() } ], win : true } )
+  },
+  openGames() { //find games where x or o is not in play and both x, o are not current user id
+    return Games.find( { $or: [ { xs: null }, { os: null } ] , $and: [ { xs: {$ne: Meteor.userId()} }, { os: {$ne: Meteor.userId()} } ] } )
   },
   closedGames() {
-    return Games.find({ $and: [ { xs: {$ne: null} }, { os: {$ne: null} } ] })
+    return Games.find({ $and: [ { xs: {$ne: null} }, { os: {$ne: null} } ], win: false })
+  },
+  finishedGames() {
+    return Games.find({ $and: [ { xs: {$ne: null} }, { os: {$ne: null} } ], win: true })
   }
 });
 
 Template.Main.events({
   'submit .new-game'(event) {
-    debugger;
     // Prevent default browser form submit
     event.preventDefault();
 
@@ -53,8 +58,9 @@ Template.Main.events({
       i: '',
       xs: xs,
       os: os,
-      win: null,
+      win: false,
       winner: null,
+      turn: 'X',
       createdAt: new Date(), // current time
     }
 
@@ -64,7 +70,7 @@ Template.Main.events({
     target.player.value = '';
   },
   'click .joinGame'(event) {
-    console.log(event);
+
     //event.target is the button we clicked on
     //this is the document here
 

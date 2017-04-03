@@ -27,19 +27,30 @@ let winningCombinations = [
 let xWin = false;
 let oWin = false;
 
-function checkWinner(){
+function checkWinner(g){
 	for (let i=0; i<winningCombinations.length; i++){
 		let xCount = 0;
 		let oCount = 0;
 		for (let j=0; j<winningCombinations[i].length; j++){
 			let mini = winningCombinations[i][j];
 
-			let result = $('td[data-pos=\'' + mini + '\']').text();
+			let result = g[mini]
+
+			// console.log('-------mini, result---------');
+			// console.log(mini, result);
+			// console.log('----------------');
 
 			if (result == 'X') xCount++;
 			else if (result == 'O') oCount++;
 		}
 
+		if ((xCount > 0) || (oCount > 0)){
+			console.log('---------xCount, oCount---------');
+			console.log(xCount, oCount)
+			console.log('------------------');
+
+		}
+		
 		if (xCount == 3) xWin = true;
 		else if(oCount == 3) oWin = true;
 	}
@@ -74,6 +85,9 @@ Template.Game.helpers({
     }
 });
 
+//basically it's going in and not finding winners
+//because it checks the ui before it updates the database
+//and the ui updates after the database updates
 Template.Game.events({
   'click td'(event){
 
@@ -83,20 +97,8 @@ Template.Game.events({
     	let pos = targ.data('pos');
 
     	//only fill in if empty
-    	if (targ.text() == ''){
+    	if ((targ.text() == '') && (xWin == false) && (oWin == false)){
     		var ob = {};
-    		
-    		checkWinner();
-
-    		if (xWin){
-    			ob['win'] = true;
-    			ob['winner'] = game.xs;
-    		}
-
-    		if (oWin){
-    			ob['win'] = true;
-    			ob['winner'] = game.os;
-    		}
 
     		if (xs == Meteor.userId()){	
     			ob[pos] = 'X'
@@ -111,6 +113,26 @@ Template.Game.events({
     			  $set: ob,
     			});
     		}
+
+			checkWinner(game);
+
+			if ((xWin == true) || (oWin == true)){
+				console.log("-----xWin, oWin--------");
+				console.log(xWin, oWin);
+				console.log("-------------");
+			}
+			
+			if (xWin || oWin){
+				let ob = {}
+				ob['win'] = true;
+				if (xWin) ob['winner'] = game.xs;
+				else ob['winner'] = game.os;
+
+				Games.update(FlowRouter.getParam('id'), {
+				  $set: ob,
+				});
+			}
+    			    		
     	}
   },
 });
