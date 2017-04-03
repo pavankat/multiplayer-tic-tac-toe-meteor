@@ -1,5 +1,7 @@
 # Meteor Multiplayer Tic Tac Toe Example
 
+4/2/17 -> game saves winner and win but saves the turn after the win (relevant code is in game.js and game.html)
+
 ctrl + m brings up meteor toys -> yet another reason to use Meteor.
 
 ## Warning brah

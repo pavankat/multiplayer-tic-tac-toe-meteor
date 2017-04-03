@@ -96,8 +96,8 @@ Template.Game.events({
     	let targ = $(event.target);
     	let pos = targ.data('pos');
 
-    	//only fill in if empty
-    	if ((targ.text() == '') && (xWin == false) && (oWin == false)){
+    	//only fill in if empty and win is false
+    	if (((targ.text() == '') && (xWin == false) && (oWin == false)) && game.win == false) {
     		var ob = {};
 
     		if (xs == Meteor.userId()){	
