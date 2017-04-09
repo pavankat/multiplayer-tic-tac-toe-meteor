@@ -28,6 +28,8 @@ let xWin = false;
 let oWin = false;
 
 function checkWinner(g){
+	debugger;
+
 	for (let i=0; i<winningCombinations.length; i++){
 		let xCount = 0;
 		let oCount = 0;
@@ -102,36 +104,36 @@ Template.Game.events({
 
     		if (xs == Meteor.userId()){	
     			ob[pos] = 'X'
-	    		Games.update(FlowRouter.getParam('id'), {
-	    		  $set: ob,
-	    		});
     		}
 
     		if (os == Meteor.userId()){
     			ob[pos] = 'O'
-    			Games.update(FlowRouter.getParam('id'), {
-    			  $set: ob,
-    			});
     		}
 
-			checkWinner(game);
+    		Games.update(FlowRouter.getParam('id'), {
+    		  $set: ob,
+    		}, function(err){
+    			debugger;
+    			
+    			checkWinner(game);
 
-			if ((xWin == true) || (oWin == true)){
-				console.log("-----xWin, oWin--------");
-				console.log(xWin, oWin);
-				console.log("-------------");
-			}
-			
-			if (xWin || oWin){
-				let ob = {}
-				ob['win'] = true;
-				if (xWin) ob['winner'] = game.xs;
-				else ob['winner'] = game.os;
+    			if ((xWin == true) || (oWin == true)){
+    				console.log("-----xWin, oWin--------");
+    				console.log(xWin, oWin);
+    				console.log("-------------");
+    			}
+    			
+    			if (xWin || oWin){
+    				let ob = {}
+    				ob['win'] = true;
+    				if (xWin) ob['winner'] = game.xs;
+    				else ob['winner'] = game.os;
 
-				Games.update(FlowRouter.getParam('id'), {
-				  $set: ob,
-				});
-			}
+    				Games.update(FlowRouter.getParam('id'), {
+    				  $set: ob,
+    				});
+    			}
+    		});
     			    		
     	}
   },

@@ -35,16 +35,16 @@
       {{/each}}
     </ul>
 
-    <h2>Your Finished Games</h2>
+    <h2>Open Games</h2>
     <ul>
-      {{#each myPastGames}}
+      {{#each openGames}}
         {{> joinGame}} <hr> <br><br>
       {{/each}}
     </ul>
 
-    <h2>Open Games</h2>
+    <h2>Your Finished Games</h2>
     <ul>
-      {{#each openGames}}
+      {{#each myPastGames}}
         {{> joinGame}} <hr> <br><br>
       {{/each}}
     </ul>
