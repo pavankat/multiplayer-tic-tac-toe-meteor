@@ -1,6 +1,10 @@
 <template name="Game">
 	<h1>Play Tic Tac Toe</h1>
 	{{#if game}}
+		{{#if game.win}}
+			<h2>The winner is: {{grabUserName game.winner}}</h2>
+		{{/if}}
+
 		{{#if currentUserIsOs}}
 			<p>You ({{currentUser.username}}) are O's</p>
 			<p>{{grabUserName game.xs}} is X's</p>
