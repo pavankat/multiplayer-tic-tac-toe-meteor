@@ -15,14 +15,14 @@ Template.Main.helpers({
   myPastGames() {
     return Games.find( { $or: [ { xs: Meteor.userId() }, { os: Meteor.userId() } ], win : true } )
   },
-  openGames() { //find games where x or o is not in play and both x, o are not current user id
+  openGames() { //find games where x or o is not in play AND both x, o are not current user id
     return Games.find( { $or: [ { xs: null }, { os: null } ] , $and: [ { xs: {$ne: Meteor.userId()} }, { os: {$ne: Meteor.userId()} } ] } )
   },
-  closedGames() {
-    return Games.find({ $and: [ { xs: {$ne: null} }, { os: {$ne: null} } ], win: false })
+  closedGames() { //find games where xs and os does not equal the current user id AND are not null AND win is false
+    return Games.find({ $and: [ { xs: {$ne: null} }, { os: {$ne: null} } ], win: false, $and: [ { xs: {$ne: Meteor.userId()} }, { os: {$ne: Meteor.userId()} } ]})
   },
-  finishedGames() {
-    return Games.find({ $and: [ { xs: {$ne: null} }, { os: {$ne: null} } ], win: true })
+  finishedGames() { //find games where xs and os does not equal the current user id AND are not null AND win is true
+    return Games.find({ $and: [ { xs: {$ne: null} }, { os: {$ne: null} } ], win: true, $and: [ { xs: {$ne: Meteor.userId()} }, { os: {$ne: Meteor.userId()} } ] })
   }
 });
 
@@ -60,7 +60,9 @@ Template.Main.events({
       os: os,
       win: false,
       winner: null,
-      turn: 'X',
+      x_start: false,
+      y_start: false,
+      start_time: new Date(), // current time
       createdAt: new Date(), // current time
     }
 
