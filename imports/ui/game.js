@@ -28,7 +28,6 @@ let xWin = false;
 let oWin = false;
 
 function checkWinner(g){
-	debugger;
 
 	for (let i=0; i<winningCombinations.length; i++){
 		let xCount = 0;
@@ -91,6 +90,26 @@ Template.Game.helpers({
 //because it checks the ui before it updates the database
 //and the ui updates after the database updates
 Template.Game.events({
+  'click #startGame'(event){        
+    let ob = {};
+        
+    //set x_start or y_start to true depending on who clicked the start button
+    let whoClicked = (xs == Meteor.userId()) ? 'x_start' : 'y_start';
+    ob[whoClicked] = true;
+    ob['start_time'] = Date.now(); //doesn't save properly into mongo document -> it comes in like this: "start_time" : 1493321505034.0,
+
+    Games.update(FlowRouter.getParam('id'), {
+      $set: ob,
+    }, function(err){
+      console.log('hit call back');
+      if (game.x_start && game.y_start){
+        console.log('hit line 106');
+      }else{
+        console.log('hit line 108');
+      }
+    });
+
+  },
   'click td'(event){
 
 	   	//game_id, xs, os is available here
@@ -113,7 +132,6 @@ Template.Game.events({
     		Games.update(FlowRouter.getParam('id'), {
     		  $set: ob,
     		}, function(err){
-    			debugger;
     			
     			checkWinner(game);
 
