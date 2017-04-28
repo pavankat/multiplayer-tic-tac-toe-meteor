@@ -85,10 +85,14 @@ Template.Game.helpers({
     	return ((xs == Meteor.userId()));
     },
     currentUserClickedStart : function() {
-        return ((game.x_start == true) || (game.y_start == true));
+        if (xs == Meteor.userId()){
+            return (game.x_start == true);
+        }else if(os == Meteor.userId()){
+            return (game.o_start == true);
+        }
     },
     bothUsersClickedStart : function() {
-        return ((game.x_start == true) && (game.y_start == true));
+        return ((game.x_start == true) && (game.o_start == true));
     }
 });
 
@@ -99,8 +103,8 @@ Template.Game.events({
   'click #startGame'(event){        
     let ob = {};
         
-    //set x_start or y_start to true depending on who clicked the start button
-    let whoClicked = (xs == Meteor.userId()) ? 'x_start' : 'y_start';
+    //set x_start or o_start to true depending on who clicked the start button
+    let whoClicked = (xs == Meteor.userId()) ? 'x_start' : 'o_start';
     ob[whoClicked] = true;
     ob['start_time'] = Date.now(); //doesn't save properly into mongo document -> it comes in like this: "start_time" : 1493321505034.0,
 
@@ -108,7 +112,7 @@ Template.Game.events({
       $set: ob,
     }, function(err){
       console.log('hit call back');
-      if (game.x_start && game.y_start){
+      if (game.x_start && game.o_start){
         console.log('hit line 106');
       }else{
         console.log('hit line 108');

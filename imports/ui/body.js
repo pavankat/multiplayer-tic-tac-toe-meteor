@@ -61,7 +61,7 @@ Template.Main.events({
       win: false,
       winner: null,
       x_start: false,
-      y_start: false,
+      o_start: false,
       start_time: new Date(), // current time
       createdAt: new Date(), // current time
     }
