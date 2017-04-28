@@ -83,6 +83,12 @@ Template.Game.helpers({
     },
     currentUserIsXs : function() {
     	return ((xs == Meteor.userId()));
+    },
+    currentUserClickedStart : function() {
+        return ((game.x_start == true) || (game.y_start == true));
+    },
+    bothUsersClickedStart : function() {
+        return ((game.x_start == true) && (game.y_start == true));
     }
 });
 
