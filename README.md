@@ -1,5 +1,15 @@
 # Meteor Multiplayer Tic Tac Toe Example
 
+5/8/17 ->
+
+to do:
+------
+
+the button should be depressed if the person pressed it and it should say waiting for opponent
+
+if both clicked it - it should show a 5 second timer
+
+
 4/27/17 -> start button KIND OF works 
 
 added these fields to the games collection:
